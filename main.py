@@ -43,5 +43,15 @@ for key in preProc_dataTrain.keys():
     if key != 'Survived':
         features.append(layers.Input(shape=(1,), name=key))
 
-print(features)
+### Definition of the Input Function ###
 
+def input_fn(data, labels=None, training=True, batch_size=32):
+    # Create a tf.data.Dataset object from the input data and labels
+    dataset = tf.data.Dataset.from_tensor_slices((dict(data), labels))
+
+    # If training is True, shuffle the data and repeat it indefinitely
+    if training:
+        dataset = dataset.shuffle(1000).repeat()
+
+    # Return the batched dataset
+    return dataset.batch(batch_size)
