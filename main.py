@@ -1,5 +1,7 @@
-import torch
+import tensorflow as tf
+from keras import layers
 import pandas as pd
+import numpy as np
 import os
 
 ### Get the data ###
@@ -32,5 +34,14 @@ def preprocess(df):
 preProc_dataTrain = preprocess(dataTrain)
 preProc_dataTest = preprocess(dataTest)
 
+### Get the input features ###
 
+features = []
+removesFeature = ["Ticket","PassengerId","Survived"]
+
+for key in preProc_dataTrain.keys():
+    if key != 'Survived':
+        features.append(layers.Input(shape=(1,), name=key))
+
+print(features)
 
