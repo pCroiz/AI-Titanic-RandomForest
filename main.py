@@ -1,8 +1,11 @@
 import tensorflow as tf
+import tensorflow_decision_forests as tfdf
 from keras import layers
 import pandas as pd
 import numpy as np
 import os
+
+print("Found TensorFlow Decision Forests v" + tf.__version__)
 
 ### Get the data ###
 path = os.getcwd()
@@ -64,3 +67,5 @@ def input_fn(data, labels=None, training=True, batch_size=32):
 
     # Return the batched dataset
     return dataset.batch(batch_size)
+
+### Creation of the Model (the tree) ###
