@@ -1,9 +1,11 @@
 import torch
 import pandas as pd
+import os
 
 # Get the data
-dataTrain = pd.read_csv('/data/train.csv')
-dataTest = pd.read_csv('/data/test.csv')
+path = os.getcwd()
+dataTrain = pd.read_csv(path + '/data/train.csv')
+dataTest = pd.read_csv(path + '/data/test.csv')
 
-print(dataTrain)
+
 
