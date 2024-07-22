@@ -1,5 +1,5 @@
 import tensorflow as tf
-import tensorflow_decision_forests as tfdf
+#import tensorflow_decision_forests as tfdf
 from keras import layers
 import pandas as pd
 import numpy as np
