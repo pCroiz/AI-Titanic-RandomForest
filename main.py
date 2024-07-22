@@ -9,7 +9,8 @@ path = os.getcwd()
 dataTrain = pd.read_csv(path + '/data/train.csv')
 dataTest = pd.read_csv(path + '/data/test.csv')
 
-### Preprocess the data ##
+### Preprocess the data ###
+print(dataTrain)
 
 def preprocess(df):
     df = df.copy()
@@ -28,7 +29,14 @@ def preprocess(df):
     
     df["Name"] = df["Name"].apply(normalize_name)
     df["Ticket_number"] = df["Ticket"].apply(ticket_number)
-    df["Ticket_item"] = df["Ticket"].apply(ticket_item)                     
+    df["Ticket_item"] = df["Ticket"].apply(ticket_item)   
+
+    # Error woth the Cabin column 
+    df.drop('Cabin', axis=1, inplace=True)
+
+    # Error with the Embarked column
+    df.drop('Embarked', axis=1, inplace=True)       
+
     return df
     
 preProc_dataTrain = preprocess(dataTrain)
@@ -45,6 +53,7 @@ for key in preProc_dataTrain.keys():
 
 ### Definition of the Input Function ###
 
+# Usefull to convert the pd dataset to an tf dataset
 def input_fn(data, labels=None, training=True, batch_size=32):
     # Create a tf.data.Dataset object from the input data and labels
     dataset = tf.data.Dataset.from_tensor_slices((dict(data), labels))
